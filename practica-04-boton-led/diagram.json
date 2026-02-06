@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "ESP32 Course",
+  "author": "ESP32 Kids Course",
   "editor": "wokwi",
   "parts": [
     {
@@ -11,59 +11,59 @@
       "attrs": {}
     },
     {
-      "type": "wokwi-button",
-      "id": "b1",
-      "top": -50,
-      "left": 100,
-      "attrs": {}
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": -66,
+      "left": 230.4,
+      "attrs": {
+        "color": "blue"
+      }
     },
     {
       "type": "wokwi-led",
       "id": "led1",
-      "top": -150,
-      "left": 300,
+      "top": 67.2,
+      "left": 249.8,
       "attrs": {
-        "color": "red"
+        "color": "green"
       }
     },
     {
       "type": "wokwi-resistor",
       "id": "r1",
-      "top": 0,
-      "left": 250,
+      "top": 76.75,
+      "left": 182.4,
+      "rotate": 90,
       "attrs": {
         "value": "220"
-      }
-    },
-    {
-      "type": "wokwi-resistor",
-      "id": "r2",
-      "top": -100,
-      "left": 350,
-      "attrs": {
-        "value": "10k"
       }
     }
   ],
   "connections": [
     [
-      "esp:GND.1",
-      "b1:G",
+      "esp:TX0",
+      "$serialMonitor:RX",
       "",
       []
     ],
     [
-      "b1:P",
-      "r2:1",
-      "green",
+      "esp:RX0",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "esp:D15",
+      "btn1:1.l",
+      "blue",
       [
-        "v0"
+        "h0"
       ]
     ],
     [
-      "r2:2",
-      "led1:A",
-      "green",
+      "btn1:2.r",
+      "esp:GND.1",
+      "black",
       [
         "v0"
       ]
@@ -73,16 +73,25 @@
       "r1:1",
       "green",
       [
-        "v0"
+        "h0"
       ]
     ],
     [
       "r1:2",
-      "b1:P",
+      "led1:A",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "led1:C",
+      "esp:GND.2",
       "black",
       [
         "v0"
       ]
     ]
-  ]
+  ],
+  "dependencies": {}
 }

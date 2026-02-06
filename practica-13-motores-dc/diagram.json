@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "ESP32 Course",
+  "author": "ESP32 Kids Course",
   "editor": "wokwi",
   "parts": [
     {
@@ -11,75 +11,42 @@
       "attrs": {}
     },
     {
-      "type": "wokwi-motor-dc",
-      "id": "motor",
-      "top": -100,
-      "left": 200,
-      "attrs": {
-        "name": "Motor DC"
-      }
-    },
-    {
-      "type": "wokwi-driver-l298n",
-      "id": "l298n",
-      "top": -150,
-      "left": 350,
+      "type": "wokwi-motor",
+      "id": "motor1",
+      "top": -48,
+      "left": 268.8,
       "attrs": {}
-    },
-    {
-      "type": "wokwi-battery-9v",
-      "id": "bateria",
-      "top": 100,
-      "left": 50,
-      "attrs": {
-        "name": "Batería"
-      }
     }
   ],
   "connections": [
     [
-      "esp:GPIO2",
-      "l298n:IN1",
+      "esp:TX0",
+      "$serialMonitor:RX",
       "",
       []
     ],
     [
-      "esp:GPIO4",
-      "l298n:IN2",
+      "esp:RX0",
+      "$serialMonitor:TX",
       "",
       []
     ],
     [
-      "bateria:P",
-      "l298n:VCC",
+      "motor1:A+",
+      "esp:D12",
       "red",
       [
         "v0"
       ]
     ],
     [
-      "l298n:GND",
-      "esp:GND.1",
+      "motor1:A-",
+      "esp:D13",
       "black",
       [
         "v0"
       ]
-    ],
-    [
-      "motor:A",
-      "l298n:IN3",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "motor:B",
-      "l298n:IN4",
-      "green",
-      [
-        "v0"
-      ]
     ]
-  ]
+  ],
+  "dependencies": {}
 }

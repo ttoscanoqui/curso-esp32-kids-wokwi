@@ -1,66 +1,49 @@
-// Configuración de pines
-const int PIN_ROJO = 12; // LED rojo conectado a pin D12
-const int PIN_AMARILLO = 13; // LED amarillo conectado a pin D13
-const int PIN_VERDE = 14; // LED verde conectado a pin D14
+// Semáforo simulado con ESP32 y LEDs
+// Componentes: 3 LEDs, 3 Resistencias 220Ω
+// Pines utilizados:
+// - LED_ROJO: GPIO 2
+// - LED_AMARILLO: GPIO 4
+// - LED_VERDE: GPIO 5
 
-// Configuración de estados del semáforo
-const int ESTADO_PARADO = 0;
-const int ESTADO_AMARILLO = 1;
-const int ESTADO_ROJO = 2;
+#include <Arduino.h>
 
-int estadoActual = ESTADO_PARADO;
-unsigned long tiempoUltimoCambio = 0; // Tiempo en que se cambió el estado
+// Constantes para los pines de los LEDs
+const int LED_ROJO = 2;
+const int LED_AMARILLO = 4;
+const int LED_VERDE = 5;
 
 void setup() {
-  Serial.begin(115200); // Inicializar puerto serial a 115200 baudios
-  pinMode(PIN_ROJO, OUTPUT); // Configurar pin del LED rojo como salida
-  pinMode(PIN_AMARILLO, OUTPUT); // Configurar pin del LED amarillo como salida
-  pinMode(PIN_VERDE, OUTPUT); // Configurar pin del LED verde como salida
+  // Inicializa la comunicación serial a 115200 baudios
+  Serial.begin(115200);
+  
+  // Configura los pines como salida para los LEDs
+  pinMode(LED_ROJO, OUTPUT);
+  pinMode(LED_AMARILLO, OUTPUT);
+  pinMode(LED_VERDE, OUTPUT);
 
-  Serial.println("Semáforo inteligente inicializado");
+  // Imprime un mensaje en la consola para confirmar el inicio del semáforo
+  Serial.println("Semáforo iniciado");
 }
 
 void loop() {
-  // Actualizar tiempo de cambio de estado
-  unsigned long currentTime = millis();
-  if (currentTime - tiempoUltimoCambio > 2000) { // Cambiar estado cada 2 segundos
-    tiempoUltimoCambio = currentTime;
+  // Simula el funcionamiento del semáforo con una duración de 10 segundos por cada estado
+  for (int i = 0; i < 30; i++) { // 3 ciclos x 10 segundos = 30 segundos en total
+    // Estado rojo: 5 segundos
+    digitalWrite(LED_ROJO, HIGH);
+    digitalWrite(LED_AMARILLO, LOW);
+    digitalWrite(LED_VERDE, LOW);
+    delay(5000);
 
-    // Cambiar estado del semáforo
-    switch (estadoActual) {
-      case ESTADO_PARADO:
-        estadoActual = ESTADO_AMARILLO;
-        Serial.println("Estado: AMARILLO");
-        break;
-      case ESTADO_AMARILLO:
-        estadoActual = ESTADO_ROJO;
-        Serial.println("Estado: ROJO");
-        break;
-      case ESTADO_ROJO:
-        estadoActual = ESTADO_PARADO;
-        Serial.println("Estado: PARADO");
-        break;
-    }
+    // Estado amarillo: 2 segundos
+    digitalWrite(LED_ROJO, LOW);
+    digitalWrite(LED_AMARILLO, HIGH);
+    digitalWrite(LED_VERDE, LOW);
+    delay(2000);
+
+    // Estado verde: 3 segundos
+    digitalWrite(LED_ROJO, LOW);
+    digitalWrite(LED_AMARILLO, LOW);
+    digitalWrite(LED_VERDE, HIGH);
+    delay(3000);
   }
-
-  // Encender LED según el estado del semáforo
-  switch (estadoActual) {
-    case ESTADO_AMARILLO:
-      digitalWrite(PIN_VERDE, LOW); // Apagar LED verde
-      digitalWrite(PIN_ROJO, LOW); // Apagar LED rojo
-      digitalWrite(PIN_AMARILLO, HIGH); // Encender LED amarillo
-      break;
-    case ESTADO_ROJO:
-      digitalWrite(PIN_VERDE, LOW); // Apagar LED verde
-      digitalWrite(PIN_AMARILLO, LOW); // Apagar LED amarillo
-      digitalWrite(PIN_ROJO, HIGH); // Encender LED rojo
-      break;
-    case ESTADO_PARADO:
-      digitalWrite(PIN_VERDE, HIGH); // Encender LED verde
-      digitalWrite(PIN_AMARILLO, LOW); // Apagar LED amarillo
-      digitalWrite(PIN_ROJO, LOW); // Apagar LED rojo
-      break;
-  }
-
-  delay(100); // Retraso para evitar sobrecarga del puerto serial
 }

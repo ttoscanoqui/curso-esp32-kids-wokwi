@@ -1,57 +1,40 @@
-c++
-// Práctica 13: Control de Motores DC - Movimiento Básico
-// Componentes: ESP32, Motor DC, Driver L298N, Batería, Cables
-// Conceptos: Control de motores, H-Bridge, Dirección
+// Práctica: Motor DC
+// Descripción: Controla motor DC
+// Componentes: ESP32, Motor DC
 
-#include <Wire.h>
+#include <Arduino.h>
 
-// Constantes para los pines del ESP32
-const int PIN_MOTOR_A_IN1 = 12;  // Pin 12 como entrada 1 (A)
-const int PIN_MOTOR_A_IN2 = 14;  // Pin 14 como salida 2 (B)
-const int PIN_MOTOR_B_IN3 = 27;  // Pin 27 como entrada 3 (C)
-const int PIN_MOTOR_B_IN4 = 26;  // Pin 26 como salida 4 (D)
-
-// Constante para el frecuencia del PWM
-const int FRECUENCIA_PWM = 1000;  // Hz
+// Definición de pines
+const int MOTOR_A = 12; // GPIO 12
+const int MOTOR_B = 13; // GPIO 13
 
 void setup() {
-  Serial.begin(115200);  // Inicializar la comunicación serie
+  // Configuración inicial del pin para salida
+  pinMode(MOTOR_A, OUTPUT);
+  pinMode(MOTOR_B, OUTPUT);
 
-  // Configurar los pines como salidas
-  pinMode(PIN_MOTOR_A_IN1, OUTPUT);
-  pinMode(PIN_MOTOR_A_IN2, OUTPUT);
-  pinMode(PIN_MOTOR_B_IN3, OUTPUT);
-  pinMode(PIN_MOTOR_B_IN4, OUTPUT);
+  // Inicializar la comunicación serial a 115200 baudios
+  Serial.begin(115200);
 
-  // Inicializar el driver L298N (H-Bridge)
-  digitalWrite(PIN_MOTOR_A_IN1, LOW);
-  digitalWrite(PIN_MOTOR_A_IN2, LOW);
-  digitalWrite(PIN_MOTOR_B_IN3, LOW);
-  digitalWrite(PIN_MOTOR_B_IN4, LOW);
+  // Imprimir mensaje de inicio en la consola
+  Serial.println("Motor DC controlado con ESP32");
 }
 
 void loop() {
-  // Movimiento en sentido horario
-  Serial.println("Movimiento en sentido horario");
-  digitalWrite(PIN_MOTOR_A_IN1, HIGH);  // Salida 1 (A) alta
-  digitalWrite(PIN_MOTOR_A_IN2, LOW);   // Salida 2 (B) baja
-  digitalWrite(PIN_MOTOR_B_IN3, HIGH);  // Salida 3 (C) alta
-  digitalWrite(PIN_MOTOR_B_IN4, LOW);   // Salida 4 (D) baja
-  delay(1000);
+  // Configuración del motor para girar hacia adelante
+  digitalWrite(MOTOR_A, HIGH);
+  digitalWrite(MOTOR_B, LOW);
 
-  // Movimiento en sentido antihorario
-  Serial.println("Movimiento en sentido antihorario");
-  digitalWrite(PIN_MOTOR_A_IN1, LOW);   // Salida 1 (A) baja
-  digitalWrite(PIN_MOTOR_A_IN2, HIGH);  // Salida 2 (B) alta
-  digitalWrite(PIN_MOTOR_B_IN3, LOW);   // Salida 3 (C) baja
-  digitalWrite(PIN_MOTOR_B_IN4, HIGH);  // Salida 4 (D) alta
-  delay(1000);
+  // Impedir que el motor gire hacia atrás al mismo tiempo
+  delay(1000); // Tiempo de ejecución
 
-  // Parada del motor
-  Serial.println("Parada del motor");
-  digitalWrite(PIN_MOTOR_A_IN1, LOW);
-  digitalWrite(PIN_MOTOR_A_IN2, LOW);
-  digitalWrite(PIN_MOTOR_B_IN3, LOW);
-  digitalWrite(PIN_MOTOR_B_IN4, LOW);
-  delay(1000);
+  // Configuración del motor para girar hacia atras
+  digitalWrite(MOTOR_A, LOW);
+  digitalWrite(MOTOR_B, HIGH);
+
+  // Impedir que el motor gire hacia adelante al mismo tiempo
+  delay(1000); // Tiempo de ejecución
+
+  // Imprimir mensaje de actualización en la consola
+  Serial.println("Motor girando...");
 }

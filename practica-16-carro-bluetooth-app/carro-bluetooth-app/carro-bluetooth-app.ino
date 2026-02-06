@@ -1,75 +1,64 @@
-c++
-// Práctica 16: Carro Bluetooth - Control desde App Móvil
-
-// Importar bibliotecas necesarias
+// Bibliotecas necesarias
 #include <WiFi.h>
-#include <BluetoothDevice.h>
+#include <BT.h>
 
-// Definir constantes para los pines
-const int PIN_MOTOR_LEFT_FORWARD = 12; // GPIO 12 (D6)
-const int PIN_MOTOR_LEFT_BACKWARD = 14; // GPIO 14 (D5)
-const int PIN_MOTOR_RIGHT_FORWARD = 27; // GPIO 27 (D13)
-const int PIN_MOTOR_RIGHT_BACKWARD = 25; // GPIO 25 (D11)
+// Pines utilizados para controlar los motores
+const int MOTOR_IZQ_A = 12;
+const int MOTOR_IZQ_B = 13;
+const int MOTOR_DER_A = 14;
+const int MOTOR_DER_B = 27;
 
-// Definir pines para Bluetooth
-const int PIN_BLUETOOTH_TX = 17; // GPIO 17 (D2)
-const int PIN_BLUETOOTH_RX = 16; // GPIO 16 (D0)
+// Variable para almacenar la velocidad del motor izquierdo
+int velocidadIzquierda = 0;
 
-// Definir variables para controlar el motor
-int motorLeftSpeed = 0;
-int motorRightSpeed = 0;
+// Variable para almacenar la velocidad del motor derecho
+int velocidadDerecha = 0;
 
 void setup() {
-  // Inicializar pines como salida
-  pinMode(PIN_MOTOR_LEFT_FORWARD, OUTPUT);
-  pinMode(PIN_MOTOR_LEFT_BACKWARD, OUTPUT);
-  pinMode(PIN_MOTOR_RIGHT_FORWARD, OUTPUT);
-  pinMode(PIN_MOTOR_RIGHT_BACKWARD, OUTPUT);
+  // Inicializar los pines como salidas
+  pinMode(MOTOR_IZQ_A, OUTPUT);
+  pinMode(MOTOR_IZQ_B, OUTPUT);
+  pinMode(MOTOR_DER_A, OUTPUT);
+  pinMode(MOTOR_DER_B, OUTPUT);
 
-  // Configurar Bluetooth
-  Serial.begin(115200); // Inicializar puerto serie a 115200 bps
+  // Conectar a la red Wi-Fi
+  WiFi.begin("TuRed", "TuContraseña");
 
-  // Conectar con la red WiFi (en este caso se asume que el dispositivo está conectado a una red)
-  WiFi.begin("Nombre de la red", "Clave de la red");
+  // Inicializar el módulo Bluetooth
+  BT.begin();
 
-  // Esperar a que se complete la conexión
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Conectando a la red...");
-  }
-
-  Serial.println("Conexión establecida!");
+  // Configurar el baudrate para la comunicación serie
+  Serial.begin(115200);
 }
 
 void loop() {
-  // Leer datos desde el dispositivo Bluetooth (en este caso se asume que se está conectado al mismo)
-  String data = "";
-  while (Serial.available()) {
-    char c = Serial.read();
-    data += c;
+  // Comprobar si se ha conectado a un dispositivo bluetooth
+  if (BT.isConnected()) {
+    // Leer datos del dispositivo bluetooth
+    String mensaje = BT.readString();
+    
+    // Analizar el mensaje recibido y controlar los motores según sea necesario
+    if (mensaje == "izquierda") {
+      velocidadIzquierda = 255;
+      velocidadDerecha = 0;
+    } else if (mensaje == "derecha") {
+      velocidadIzquierda = 0;
+      velocidadDerecha = 255;
+    } else if (mensaje == "adelante") {
+      velocidadIzquierda = 128;
+      velocidadDerecha = 128;
+    } else if (mensaje == "atras") {
+      velocidadIzquierda = -128;
+      velocidadDerecha = -128;
+    }
+
+    // Actualizar los valores de velocidad en los motores
+    analogWrite(MOTOR_IZQ_A, abs(velocidadIzquierda));
+    digitalWrite(MOTOR_IZQ_B, digitalPinHigh(velocidadIzquierda > 0 ? HIGH : LOW));
+    analogWrite(MOTOR_DER_A, abs(velocidadDerecha));
+    digitalWrite(MOTOR_DER_B, digitalPinHigh(velocidadDerecha > 0 ? HIGH : LOW));
+
+    // Imprimir por consola los valores de velocidad
+    Serial.println("Velocidad izquierda: " + String(velocidadIzquierda) + ", Velocidad derecha: " + String(velocidadDerecha));
   }
-
-  // Procesar los comandos
-  if (data == "F") { // F: Avanzar
-    motorLeftSpeed = 255; // Velocidad máxima para el motor izquierdo
-    motorRightSpeed = 255; // Velocidad máxima para el motor derecho
-  } else if (data == "B") { // B: Retroceder
-    motorLeftSpeed = -255; // Velocidad mínima para el motor izquierdo
-    motorRightSpeed = -255; // Velocidad mínima para el motor derecho
-  } else if (data == "L") { // L: Girar a la izquierda
-    motorLeftSpeed = -255; // Velocidad mínima para el motor izquierdo
-    motorRightSpeed = 255; // Velocidad máxima para el motor derecho
-  } else if (data == "R") { // R: Girar a la derecha
-    motorLeftSpeed = 255; // Velocidad máxima para el motor izquierdo
-    motorRightSpeed = -255; // Velocidad mínima para el motor derecho
-  }
-
-  // Enviar datos al driver del motor (en este caso se asume que es un L298N)
-  digitalWrite(PIN_MOTOR_LEFT_FORWARD, HIGH);
-  analogWrite(PIN_MOTOR_LEFT_BACKWARD, abs(motorLeftSpeed));
-  digitalWrite(PIN_MOTOR_RIGHT_FORWARD, HIGH);
-  analogWrite(PIN_MOTOR_RIGHT_BACKWARD, abs(motorRightSpeed));
-
-  // Esperar un poco antes de verificar si hay nuevos datos
-  delay(50);
 }

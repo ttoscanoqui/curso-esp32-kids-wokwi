@@ -1,22 +1,34 @@
-// Constantes para los pines del ESP32
-const int pinBoton = 34; // Pin que conectamos al botón
-const int pinLED = 27;   // Pin que conectamos al LED
+// Importamos la biblioteca de entrada/salida digital para ESP32
+#include <Arduino.h>
+
+// Definimos pines para botón y LED
+const int BOTON_PIN = 15; // GPIO 15
+const int LED_PIN = 2;    // GPIO 2
 
 void setup() {
-  // Configuración de los pines como entradas/ salidas
-  pinMode(pinBoton, INPUT_PULLUP); // Configuramos el pin del botón como entrada con pull-up
-  pinMode(pinLED, OUTPUT);        // Configuramos el pin del LED como salida
+  // Inicializamos la comunicación serial a una velocidad de 115200 bps
+  Serial.begin(115200);
+
+  // Configuramos el botón como entrada con pull-up interno
+  pinMode(BOTON_PIN, INPUT_PULLUP);
   
-  Serial.begin(115200); // Inicializamos la comunicación serial a 115200 baudios
+  // Configuramos el LED como salida
+  pinMode(LED_PIN, OUTPUT);
 }
 
 void loop() {
-  int estadoBoton = digitalRead(pinBoton); // Leemos el estado del botón
+  // Leemos el estado del botón
+  int boton_estado = digitalRead(BOTON_PIN);
 
-  if (estadoBoton == LOW) { // Si el botón está presionado (LOW)
-    digitalWrite(pinLED, HIGH); // Encendemos el LED
-    Serial.println("Botón presionado!"); // Imprimimos un mensaje en la consola
+  // Si está presionado el botón, encendemos el LED
+  if (boton_estado == LOW) {
+    digitalWrite(LED_PIN, HIGH);
+    Serial.println("Botón presionado");
   } else {
-    digitalWrite(pinLED, LOW); // Apagamos el LED si no se presiona el botón
+    // Sino, apagamos el LED
+    digitalWrite(LED_PIN, LOW);
   }
+
+  // Esperamos durante 10ms antes de volver a revisar el estado del botón
+  delay(10);
 }

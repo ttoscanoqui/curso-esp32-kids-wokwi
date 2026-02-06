@@ -1,42 +1,37 @@
-c++
-// Importar la librería para el sensor DHT11/DHT22
-#include "DHT.h"
+// Importar la biblioteca DHT22
+#include <DHT.h>
 
-// Definir constantes para los pines
-const int pinSensor = 14; // Pin donde se conecta el sensor DHT11/DHT22
+// Definir el pin que se utilizará para conectar el sensor DHT22
+const int DHT_PIN = 4; // GPIO 4
 
-// Definir constante para el tipo de sensor (1 para DHT11, 2 para DHT22)
-const int sensorTipo = 1;
+// Instanciar un objeto DHT de tipo DHT22
+DHT dht(DHT_PIN, DHT22);
 
 void setup() {
   // Inicializar la comunicación serie a una velocidad de 115200 bps
   Serial.begin(115200);
-
-  // Configurar el pin como entrada
-  pinMode(pinSensor, INPUT);
-
-  // Inicializar el sensor DHT11/DHT22
-  DHT dht(pinSensor, sensorTipo);
+  
+  // Inicializar el sensor DHT22
+  dht.begin();
 }
 
 void loop() {
-  // Leer la temperatura y humedad del aire
+  // Leer los datos del sensor DHT22 (temperatura y humedad)
   float temperatura = dht.readTemperature();
   float humedad = dht.readHumidity();
-
-  // Verificar si se ha producido un error al leer los datos
-  if (isnan(temperatura) || isnan(humedad)) {
-    Serial.println("Error al leer los datos");
+  
+  // Imprimir los datos en la consola serial para debug
+  Serial.println("Temperatura: " + String(temperatura) + "°C");
+  Serial.println("Humedad: " + String(humedad) + "%");
+  
+  // Asegurarse de que los valores leídos sean válidos (no NaN ni infinito)
+  if (!isnan(temperatura) && !isnan(humedad)) {
+    // No hacer nada si los valores son válidos
   } else {
-    // Mostrar la temperatura y humedad en la consola de serie
-    Serial.print("Temperatura: ");
-    Serial.print(temperatura);
-    Serial.print("°C ");
-    Serial.print("Humedad: ");
-    Serial.print(humedad);
-    Serial.println("%");
+    // Imprimir un mensaje de error en la consola serial para debug
+    Serial.println("Error al leer los datos del sensor DHT22");
   }
-
-  // Esperar un tiempo antes de volver a leer los datos
-  delay(1000);
+  
+  // Esperar durante 2 segundos antes de leer nuevamente los datos
+  delay(2000);
 }

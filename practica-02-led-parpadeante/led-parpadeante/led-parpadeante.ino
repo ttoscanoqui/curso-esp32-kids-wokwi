@@ -1,62 +1,40 @@
-// Definir pines del ESP32
-const int ledPin = 13; // Pin donde se conectará el LED
-const int resistenciaPin = 22; // Pin donde se conectará la resistencia
+// Importar la biblioteca de entrada/salida digital (DigitalIn, DigitalOut)
+#include <Arduino.h>
+
+// Definir pines y variables
+const int LED_PIN = 2; // Pino para el LED
+bool ledEstado = LOW; // Estado inicial del LED (LOW)
 
 void setup() {
-  Serial.begin(115200); // Iniciar comunicación serie a 115200 bps
+  // Inicializar la comunicación serie a 115200 baudios
+  Serial.begin(115200);
+
+  // Configurar el pin como salida
+  pinMode(LED_PIN, OUTPUT);
   
-  // Configurar pin del LED como salida
-  pinMode(ledPin, OUTPUT);
-  
-  // Configurar pin de la resistencia como entrada
-  pinMode(resistenciaPin, INPUT);
+  // Imprimir mensaje en consola para debug
+  Serial.println("Iniciando LED parpadeante");
 }
 
 void loop() {
-  // Parpadeo lento
-  parpadearLento();
-  
-  // Esperar un poco para cambiar a parpadeo rápido
-  delay(2000);
-  
-  // Parpadeo rápido
-  parpadearRapido();
-}
+  // Encender y apagar el LED con diferentes velocidades de parpadeo
+  for (int i = 0; i < 3; i++) {
+    ledEstado = HIGH;
+    delay(500);
+    ledEstado = LOW;
+    delay(500);
 
-// Función para hacer parpadear el LED con velocidad lenta
-void parpadearLento() {
-  for (int i = 0; i < 10; i++) {
-    digitalWrite(ledPin, HIGH); // Encender el LED
-    delay(100); // Esperar un poco
-    digitalWrite(ledPin, LOW); // Apagar el LED
-    delay(100); // Esperar un poco
+    ledEstado = HIGH;
+    delay(200);
+    ledEstado = LOW;
+    delay(200);
+
+    ledEstado = HIGH;
+    delay(100);
+    ledEstado = LOW;
+    delay(100);
   }
-}
-
-// Función para hacer parpadear el LED con velocidad rápida
-void parpadearRapido() {
-  for (int i = 0; i < 10; i++) {
-    digitalWrite(ledPin, HIGH); // Encender el LED
-    delay(50); // Esperar un poco
-    digitalWrite(ledPin, LOW); // Apagar el LED
-    delay(50); // Esperar un poco
-  }
-}
-
-// Bucle principal para hacer parpadear el LED con diferente velocidad cada vez
-void loop() {
-  // Llamar a la función de parpadeo lento
-  parpadearLento();
   
   // Imprimir mensaje en consola para debug
-  Serial.println("Parpadeo lento");
-  
-  // Esperar un poco antes de cambiar a parpadeo rápido
-  delay(2000);
-  
-  // Llamar a la función de parpadeo rápido
-  parpadearRapido();
-  
-  // Imprimir mensaje en consola para debug
-  Serial.println("Parpadeo rápido");
+  Serial.println("LED parpadeante");
 }

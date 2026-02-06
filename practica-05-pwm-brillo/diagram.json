@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "ESP32 Course",
+  "author": "Curso ESP32 Kids",
   "editor": "wokwi",
   "parts": [
     {
@@ -13,8 +13,8 @@
     {
       "type": "wokwi-led",
       "id": "led1",
-      "top": -50,
-      "left": 100,
+      "top": -23.4,
+      "left": 249.8,
       "attrs": {
         "color": "red"
       }
@@ -22,8 +22,8 @@
     {
       "type": "wokwi-resistor",
       "id": "r1",
-      "top": 0,
-      "left": 150,
+      "top": -14.35,
+      "left": 201.6,
       "attrs": {
         "value": "220"
       }
@@ -31,13 +31,13 @@
   ],
   "connections": [
     [
-      "esp:TX",
+      "esp:TX0",
       "$serialMonitor:RX",
       "",
       []
     ],
     [
-      "esp:RX",
+      "esp:RX0",
       "$serialMonitor:TX",
       "",
       []
@@ -47,7 +47,7 @@
       "r1:1",
       "green",
       [
-        "v0"
+        "h0"
       ]
     ],
     [
@@ -55,7 +55,7 @@
       "led1:A",
       "green",
       [
-        "v0"
+        "h0"
       ]
     ],
     [
@@ -66,5 +66,6 @@
         "v0"
       ]
     ]
-  ]
+  ],
+  "dependencies": {}
 }

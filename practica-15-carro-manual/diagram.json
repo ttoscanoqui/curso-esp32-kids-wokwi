@@ -1,115 +1,114 @@
 {
   "version": 1,
-  "author": "ESP32 Course",
+  "author": "Curso ESP32 Kids",
   "editor": "wokwi",
   "parts": [
     {
       "type": "wokwi-esp32-devkit-v1",
       "id": "esp",
       "top": 0,
-      "left": 200
+      "left": 0,
+      "attrs": {}
     },
     {
-      "type": "wokwi-motor-driver-l298n",
-      "id": "driver",
-      "top": -100,
-      "left": 400
+      "type": "wokwi-motor",
+      "id": "motor_left",
+      "top": -115.2,
+      "left": 287.6,
+      "attrs": {}
     },
     {
-      "type": "wokwi-dc-motor",
-      "id": "motor1",
-      "top": -150,
-      "left": 300
+      "type": "wokwi-motor",
+      "id": "motor_right",
+      "top": -67.2,
+      "left": 287.6,
+      "attrs": {}
     },
     {
-      "type": "wokwi-dc-motor",
-      "id": "motor2",
-      "top": -200,
-      "left": 500
-    },
-    {
-      "type": "wokwi-battery",
-      "id": "bateria",
-      "top": -250,
-      "left": 300
+      "type": "wokwi-analog-joystick",
+      "id": "joystick1",
+      "top": 28.95,
+      "left": 287.6,
+      "attrs": {}
     }
   ],
   "connections": [
     [
-      "esp:TX",
+      "esp:TX0",
       "$serialMonitor:RX",
       "",
       []
     ],
     [
-      "esp:RX",
+      "esp:RX0",
       "$serialMonitor:TX",
       "",
       []
     ],
     [
-      "esp:D2",
-      "driver:IN1",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "esp:D3",
-      "driver:IN2",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "driver:OUT1",
-      "motor1:A",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "driver:OUT2",
-      "motor1:B",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "driver:VCC.1",
-      "bateria:P",
+      "motor_left:A+",
+      "esp:D12",
       "red",
       [
         "v0"
       ]
     ],
     [
-      "driver:GND.1",
+      "motor_left:A-",
+      "esp:D13",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "motor_right:A+",
+      "esp:D14",
+      "red",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "motor_right:A-",
+      "esp:D27",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "joystick1:VCC",
+      "esp:3V3",
+      "red",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "joystick1:VERT",
+      "esp:D34",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "joystick1:HORZ",
+      "esp:D35",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "joystick1:GND",
       "esp:GND.1",
       "black",
       [
         "v0"
       ]
-    ],
-    [
-      "motor2:A",
-      "driver:OUT3",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "motor2:B",
-      "driver:OUT4",
-      "green",
-      [
-        "v0"
-      ]
     ]
-  ]
+  ],
+  "dependencies": {}
 }

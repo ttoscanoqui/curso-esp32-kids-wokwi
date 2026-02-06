@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "ESP32 Course",
+  "author": "Curso ESP32 Kids",
   "editor": "wokwi",
   "parts": [
     {
@@ -12,57 +12,43 @@
     },
     {
       "type": "wokwi-buzzer",
-      "id": "buzzer",
-      "top": -50,
-      "left": 200,
-      "attrs": {}
-    },
-    {
-      "type": "wokwi-resistor",
-      "id": "r1",
-      "top": 0,
-      "left": 150,
+      "id": "bz1",
+      "top": -43.2,
+      "left": 268.8,
       "attrs": {
-        "value": "220"
+        "volume": "0.1"
       }
     }
   ],
   "connections": [
     [
-      "esp:TX",
+      "esp:TX0",
       "$serialMonitor:RX",
       "",
       []
     ],
     [
-      "esp:RX",
+      "esp:RX0",
       "$serialMonitor:TX",
       "",
       []
     ],
     [
+      "bz1:1",
       "esp:D2",
-      "r1:1",
       "green",
       [
         "v0"
       ]
     ],
     [
-      "r1:2",
-      "buzzer:A",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "buzzer:C",
+      "bz1:2",
       "esp:GND.1",
       "black",
       [
         "v0"
       ]
     ]
-  ]
+  ],
+  "dependencies": {}
 }

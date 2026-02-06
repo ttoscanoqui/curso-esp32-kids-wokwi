@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "ESP32 Course",
+  "author": "Curso ESP32 Kids",
   "editor": "wokwi",
   "parts": [
     {
@@ -11,87 +11,60 @@
       "attrs": {}
     },
     {
-      "type": "wokwi-lcd-i2c-16x2",
-      "id": "lcd",
-      "top": -100,
-      "left": 200,
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": -115.2,
+      "left": 249.6,
       "attrs": {
-        "address": "0x3f"
+        "pins": "i2c"
       }
-    },
-    {
-      "type": "wokwi-cable",
-      "id": "c1",
-      "top": 50,
-      "left": 150
-    },
-    {
-      "type": "wokwi-cable",
-      "id": "c2",
-      "top": -100,
-      "left": 350
     }
   ],
   "connections": [
     [
-      "esp:TX",
+      "esp:TX0",
       "$serialMonitor:RX",
       "",
       []
     ],
     [
-      "esp:RX",
+      "esp:RX0",
       "$serialMonitor:TX",
       "",
       []
     ],
     [
-      "esp:D2",
-      "c1:end",
+      "lcd1:GND",
+      "esp:GND.1",
+      "black",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "lcd1:VCC",
+      "esp:VIN",
+      "red",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "lcd1:SDA",
+      "esp:D21",
       "green",
       [
         "v0"
       ]
     ],
     [
-      "c1:start",
-      "lcd:SCL",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "c1:start",
-      "lcd:SDA",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "esp:D13",
-      "c2:end",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "c2:start",
-      "lcd:SCL",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "c2:start",
-      "lcd:SDA",
-      "green",
+      "lcd1:SCL",
+      "esp:D22",
+      "blue",
       [
         "v0"
       ]
     ]
-  ]
+  ],
+  "dependencies": {}
 }

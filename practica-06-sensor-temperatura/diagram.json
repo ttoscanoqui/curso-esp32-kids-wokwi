@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "ESP32 Course",
+  "author": "Curso ESP32 Kids",
   "editor": "wokwi",
   "parts": [
     {
@@ -11,58 +11,50 @@
       "attrs": {}
     },
     {
-      "type": "wokwi-dht11",
-      "id": "dht11",
-      "top": -50,
-      "left": 100,
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -48,
+      "left": 268.1,
       "attrs": {}
-    },
-    {
-      "type": "wokwi-resistor",
-      "id": "r1",
-      "top": 0,
-      "left": 150,
-      "attrs": {
-        "value": "220"
-      }
     }
   ],
   "connections": [
     [
-      "esp:TX",
+      "esp:TX0",
       "$serialMonitor:RX",
       "",
       []
     ],
     [
-      "esp:RX",
+      "esp:RX0",
       "$serialMonitor:TX",
       "",
       []
     ],
     [
-      "dht11:VCC",
-      "r1:2",
+      "dht1:VCC",
+      "esp:3V3",
+      "red",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "dht1:SDA",
+      "esp:D4",
       "green",
       [
         "v0"
       ]
     ],
     [
-      "dht11:GND",
-      "r1:3",
+      "dht1:GND",
+      "esp:GND.1",
       "black",
       [
         "v0"
       ]
-    ],
-    [
-      "dht11:DQ",
-      "esp:D5",
-      "brown",
-      [
-        "v0"
-      ]
     ]
-  ]
+  ],
+  "dependencies": {}
 }

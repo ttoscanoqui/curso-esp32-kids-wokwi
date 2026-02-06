@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "ESP32 Kids Course",
+  "author": "Curso ESP32 Kids",
   "editor": "wokwi",
   "parts": [
     {
@@ -13,8 +13,8 @@
     {
       "type": "wokwi-pushbutton",
       "id": "btn1",
-      "top": -66,
-      "left": 230.4,
+      "top": -86.4,
+      "left": 268.8,
       "attrs": {
         "color": "blue"
       }
@@ -22,8 +22,8 @@
     {
       "type": "wokwi-led",
       "id": "led1",
-      "top": 67.2,
-      "left": 249.8,
+      "top": 30,
+      "left": 268.4,
       "attrs": {
         "color": "green"
       }
@@ -31,9 +31,8 @@
     {
       "type": "wokwi-resistor",
       "id": "r1",
-      "top": 76.75,
-      "left": 182.4,
-      "rotate": 90,
+      "top": 39.05,
+      "left": 220.2,
       "attrs": {
         "value": "220"
       }
@@ -81,7 +80,7 @@
       "led1:A",
       "green",
       [
-        "v0"
+        "h0"
       ]
     ],
     [

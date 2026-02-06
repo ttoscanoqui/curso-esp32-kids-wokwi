@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "ESP32 Kids Course",
+  "author": "Curso ESP32 Kids",
   "editor": "wokwi",
   "parts": [
     {
@@ -13,8 +13,8 @@
     {
       "type": "wokwi-motor",
       "id": "motor1",
-      "top": -48,
-      "left": 268.8,
+      "top": -67.2,
+      "left": 287.6,
       "attrs": {}
     }
   ],
@@ -42,7 +42,7 @@
     [
       "motor1:A-",
       "esp:D13",
-      "black",
+      "blue",
       [
         "v0"
       ]

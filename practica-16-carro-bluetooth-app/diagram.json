@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "ESP32 Course",
+  "author": "Curso ESP32 Kids",
   "editor": "wokwi",
   "parts": [
     {
@@ -11,123 +11,65 @@
       "attrs": {}
     },
     {
-      "type": "wokwi-driver-l298n",
-      "id": "driver",
-      "top": -50,
-      "left": 100,
-      "attrs": {
-        "vcc": "esp:3V3",
-        "gnd": "esp:GND.1"
-      }
+      "type": "wokwi-motor",
+      "id": "motor_left",
+      "top": -67.2,
+      "left": 287.6,
+      "attrs": {}
     },
     {
-      "type": "wokwi-motor-dc",
-      "id": "motor1",
-      "top": -150,
-      "left": 200,
-      "attrs": {
-        "enable": "driver:E1",
-        "forward": "driver:F1",
-        "backward": "driver:B1"
-      }
-    },
-    {
-      "type": "wokwi-motor-dc",
-      "id": "motor2",
-      "top": -150,
-      "left": 350,
-      "attrs": {
-        "enable": "driver:E2",
-        "forward": "driver:F2",
-        "backward": "driver:B2"
-      }
-    },
-    {
-      "type": "wokwi-battery",
-      "id": "bateria",
-      "top": -250,
-      "left": 300,
-      "attrs": {
-        "vcc": "driver:VCC"
-      }
+      "type": "wokwi-motor",
+      "id": "motor_right",
+      "top": -19.2,
+      "left": 287.6,
+      "attrs": {}
     }
   ],
   "connections": [
     [
-      "esp:TX",
+      "esp:TX0",
       "$serialMonitor:RX",
       "",
       []
     ],
     [
-      "esp:RX",
+      "esp:RX0",
       "$serialMonitor:TX",
       "",
       []
     ],
     [
-      "esp:D2",
-      "led1:A",
-      "green",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "driver:E1",
-      "motor1:enable",
-      "blue",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "driver:F1",
-      "motor1:forward",
-      "blue",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "driver:B1",
-      "motor1:backward",
-      "blue",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "driver:E2",
-      "motor2:enable",
-      "blue",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "driver:F2",
-      "motor2:forward",
-      "blue",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "driver:B2",
-      "motor2:backward",
-      "blue",
-      [
-        "v0"
-      ]
-    ],
-    [
-      "bateria:vcc",
-      "driver:VCC",
+      "motor_left:A+",
+      "esp:D12",
       "red",
       [
         "v0"
       ]
+    ],
+    [
+      "motor_left:A-",
+      "esp:D13",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "motor_right:A+",
+      "esp:D14",
+      "red",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "motor_right:A-",
+      "esp:D27",
+      "blue",
+      [
+        "v0"
+      ]
     ]
-  ]
+  ],
+  "dependencies": {}
 }

@@ -1,0 +1,8 @@
+[wokwi]
+version = 1
+firmware = "servidor-web.ino"
+elf = "servidor-web.elf"
+
+[[net.forward]]
+from = "localhost:9011"
+to = "target:80"

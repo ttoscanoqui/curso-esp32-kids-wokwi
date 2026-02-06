@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "author": "ESP32 Course",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-driver-l298n",
+      "id": "driver",
+      "top": -50,
+      "left": 100,
+      "attrs": {
+        "vcc": "esp:3V3",
+        "gnd": "esp:GND.1"
+      }
+    },
+    {
+      "type": "wokwi-motor-dc",
+      "id": "motor1",
+      "top": -150,
+      "left": 200,
+      "attrs": {
+        "enable": "driver:E1",
+        "forward": "driver:F1",
+        "backward": "driver:B1"
+      }
+    },
+    {
+      "type": "wokwi-motor-dc",
+      "id": "motor2",
+      "top": -150,
+      "left": 350,
+      "attrs": {
+        "enable": "driver:E2",
+        "forward": "driver:F2",
+        "backward": "driver:B2"
+      }
+    },
+    {
+      "type": "wokwi-battery",
+      "id": "bateria",
+      "top": -250,
+      "left": 300,
+      "attrs": {
+        "vcc": "driver:VCC"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "esp:D2",
+      "led1:A",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "driver:E1",
+      "motor1:enable",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "driver:F1",
+      "motor1:forward",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "driver:B1",
+      "motor1:backward",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "driver:E2",
+      "motor2:enable",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "driver:F2",
+      "motor2:forward",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "driver:B2",
+      "motor2:backward",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "bateria:vcc",
+      "driver:VCC",
+      "red",
+      [
+        "v0"
+      ]
+    ]
+  ]
+}

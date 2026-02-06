@@ -1,0 +1,8 @@
+[wokwi]
+version = 1
+firmware = "ultrasonico-distancia.ino"
+elf = "ultrasonico-distancia.elf"
+
+[[net.forward]]
+from = "localhost:9011"
+to = "target:80"

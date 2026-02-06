@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "author": "ESP32 Course",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-wifi-module",
+      "id": "wifi",
+      "top": -50,
+      "left": 100,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -150,
+      "left": 250,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-button",
+      "id": "btn",
+      "top": -100,
+      "left": 200,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [
+      "esp:GPIO2",
+      "led1:A",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "wifi:VCC",
+      "esp:3.3V",
+      "",
+      []
+    ],
+    [
+      "wifi:GND",
+      "esp:GND.1",
+      "",
+      []
+    ],
+    [
+      "btn:A",
+      "esp:D0",
+      "",
+      []
+    ],
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ]
+  ]
+}

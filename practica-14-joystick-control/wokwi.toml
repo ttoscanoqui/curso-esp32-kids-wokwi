@@ -1,0 +1,8 @@
+[wokwi]
+version = 1
+firmware = "joystick-control.ino"
+elf = "joystick-control.elf"
+
+[[net.forward]]
+from = "localhost:9011"
+to = "target:80"

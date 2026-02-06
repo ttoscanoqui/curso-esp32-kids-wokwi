@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "author": "ESP32 Course",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": 200
+    },
+    {
+      "type": "wokwi-motor-driver-l298n",
+      "id": "driver",
+      "top": -100,
+      "left": 400
+    },
+    {
+      "type": "wokwi-dc-motor",
+      "id": "motor1",
+      "top": -150,
+      "left": 300
+    },
+    {
+      "type": "wokwi-dc-motor",
+      "id": "motor2",
+      "top": -200,
+      "left": 500
+    },
+    {
+      "type": "wokwi-battery",
+      "id": "bateria",
+      "top": -250,
+      "left": 300
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "esp:D2",
+      "driver:IN1",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "esp:D3",
+      "driver:IN2",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "driver:OUT1",
+      "motor1:A",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "driver:OUT2",
+      "motor1:B",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "driver:VCC.1",
+      "bateria:P",
+      "red",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "driver:GND.1",
+      "esp:GND.1",
+      "black",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "motor2:A",
+      "driver:OUT3",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "motor2:B",
+      "driver:OUT4",
+      "green",
+      [
+        "v0"
+      ]
+    ]
+  ]
+}

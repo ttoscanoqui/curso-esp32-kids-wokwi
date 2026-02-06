@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "author": "ESP32 Course",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led-rojo",
+      "top": -50,
+      "left": 100,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 0,
+      "left": 150,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led-amarillo",
+      "top": -50,
+      "left": 250,
+      "attrs": {
+        "color": "yellow"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 0,
+      "left": 350,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led-verde",
+      "top": -50,
+      "left": 450,
+      "attrs": {
+        "color": "green"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": 0,
+      "left": 550,
+      "attrs": {
+        "value": "220"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:D2",
+      "led-rojo:A",
+      "red",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "esp:D4",
+      "r1:1",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "r1:2",
+      "led-amarillo:A",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "esp:D5",
+      "r2:1",
+      "yellow",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "r2:2",
+      "led-verde:A",
+      "yellow",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "esp:D7",
+      "r3:1",
+      "red",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "r3:2",
+      "led-rojo:A",
+      "red",
+      [
+        "v0"
+      ]
+    ]
+  ]
+}

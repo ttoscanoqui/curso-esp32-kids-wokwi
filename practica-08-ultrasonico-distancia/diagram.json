@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "author": "ESP32 Course",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": 50
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "hc-sr04",
+      "top": -200,
+      "left": 100
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "esp:D2",
+      "hc-sr04:VCC",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "hc-sr04:GND",
+      "esp:GND.1",
+      "black",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "hc-sr04:TRIG",
+      "esp:D5",
+      "blue",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "hc-sr04:ECHO",
+      "esp:D6",
+      "blue",
+      [
+        "v0"
+      ]
+    ]
+  ]
+}

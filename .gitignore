@@ -1,0 +1,17 @@
+# Arduino
+*.hex
+*.eep
+*.elf
+*.map
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDEs
+.vscode/
+.idea/
+*.code-workspace

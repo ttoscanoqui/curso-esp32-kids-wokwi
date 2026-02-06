@@ -1,0 +1,8 @@
+[wokwi]
+version = 1
+firmware = "display-lcd.ino"
+elf = "display-lcd.elf"
+
+[[net.forward]]
+from = "localhost:9011"
+to = "target:80"

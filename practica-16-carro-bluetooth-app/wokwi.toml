@@ -1,0 +1,8 @@
+[wokwi]
+version = 1
+firmware = "carro-bluetooth-app.ino"
+elf = "carro-bluetooth-app.elf"
+
+[[net.forward]]
+from = "localhost:9011"
+to = "target:80"

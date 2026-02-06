@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "author": "ESP32 Course",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -50,
+      "left": 100,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": -50,
+      "left": 250,
+      "attrs": {
+        "color": "green"
+      }
+    },
+    {
+      "type": "wokwi-usb-cable",
+      "id": "cable1",
+      "top": 0,
+      "left": 100,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "esp:D2",
+      "led1:A",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "esp:D13",
+      "led2:A",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "cable1:A",
+      "esp:VCC.1",
+      "red",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "cable1:B",
+      "esp:GND.1",
+      "black",
+      [
+        "v0"
+      ]
+    ]
+  ]
+}

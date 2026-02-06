@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "author": "ESP32 Course",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-joystick-analog",
+      "id": "joy",
+      "top": -50,
+      "left": 100,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [
+      "esp:VCC",
+      "$power:VCC",
+      "",
+      []
+    ],
+    [
+      "$power:GND",
+      "esp:GND.1",
+      "",
+      []
+    ],
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "joy:X+",
+      "esp:D2",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "joy:X-",
+      "esp:D3",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "joy:Y+",
+      "esp:D4",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "joy:Y-",
+      "esp:D5",
+      "green",
+      [
+        "v0"
+      ]
+    ]
+  ]
+}

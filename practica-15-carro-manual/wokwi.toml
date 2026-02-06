@@ -1,0 +1,8 @@
+[wokwi]
+version = 1
+firmware = "carro-manual.ino"
+elf = "carro-manual.elf"
+
+[[net.forward]]
+from = "localhost:9011"
+to = "target:80"
